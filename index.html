@@ -1,0 +1,170 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+<title>Index. redux 0.4.0</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="author" content="">
+
+<link href="css/bootstrap.css" rel="stylesheet">
+<link href="css/bootstrap-responsive.css" rel="stylesheet">
+<link href="css/highlight.css" rel="stylesheet">
+<link href="css/staticdocs.css" rel="stylesheet">
+
+<!--[if lt IE 9]>
+  <script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script>
+<![endif]-->
+
+<script type="text/x-mathjax-config">
+  MathJax.Hub.Config({
+    tex2jax: {
+      inlineMath: [ ['$','$'], ["\\(","\\)"] ],
+      processEscapes: true
+    }
+  });
+</script>
+<script type="text/javascript"
+  src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
+</script>
+  </head>
+
+  <body>
+    <div class="navbar">
+  <div class="navbar-inner">
+    <div class="container">
+      <a class="brand" href="#">redux 0.4.0</a>
+      <div class="nav">
+        <ul class="nav">
+          <li><a href="index.html"><i class="icon-home icon-white"></i> Index</a></li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</div>
+
+    <div class="container">
+      <header>
+        
+      </header>
+      
+      <div class="row">
+  <div class="span8">
+    <h1>redux</h1>
+
+<p><a href="https://travis-ci.org/richfitz/redux"><img src="https://travis-ci.org/richfitz/redux.png?branch=master" alt="Build Status"/></a></p>
+
+<p><code>redux</code> provides a low-level interface to Redis, allowing execution of arbitrary Redis commands with almost no interface.  While it can be used standalone, it is designed to be used with <a href="https://github.com/ropensci/RedisAPI"><code>RedisAPI</code></a> which provides a much friendlier interface to the Redis commands.</p>
+
+<p>As well as supporting Redis commands, <code>redux</code> supports:</p>
+
+<ul>
+<li><strong>pipelineing</strong>: execute more than one command in a single Redis roundtrip, which can greatly increase performance, especially over high-latency connections.</li>
+<li><strong>socket connections</strong>: can connect to a locally running Redis instance over a unix socket (if Redis is configured to do so) for faster communication.</li>
+<li><strong>flexible serialisation</strong>: serialise any part of a Redis command, including keys and fields.  Binary serialisation is supported (see <code>RedisAPI</code> for a helper functions).</li>
+<li><strong>subscriptions</strong>: create a simple blocking subscribe client, applying a callback function to every message recieved (see <code>RedisAPI</code> for a more friendly interface).</li>
+<li><strong>error handling</strong>: Every Redis error becomes an  R error.</li>
+</ul>
+
+<h2>Usage</h2>
+
+<p>Create a hiredis object:</p>
+
+<pre><code class="r">r &lt;- redux::hiredis()
+</code></pre>
+
+<p>The hiredis object is a hiredis object with many (<em>many</em> methods), each corresponding to a different Redis command.</p>
+
+<pre><code class="r">r
+## &lt;redis_api&gt;
+##   Redis commands:
+##     APPEND: function
+##     AUTH: function
+##     BGREWRITEAOF: function
+##     BGSAVE: function
+##     ...
+##     ZSCORE: function
+##     ZUNIONSTORE: function
+##   Other public methods:
+##     clone: function
+##     command: function
+##     config: function
+##     initialize: function
+##     pipeline: function
+##     reconnect: function
+##     subscribe: function
+##     type: function
+</code></pre>
+
+<p>All the methods are available from this object; for example to set &ldquo;foo&rdquo; to &ldquo;bar&rdquo;, use:</p>
+
+<pre><code>r$SET(&quot;foo&quot;, &quot;bar&quot;)
+</code></pre>
+
+<p>See the package vignette for more information (<code>vignette(&quot;redux&quot;)</code>) or <a href="https://richfitz.github.io/redux/vignettes/redux.html">https://richfitz.github.io/redux/vignettes/redux.html</a></p>
+
+<h2>Installation</h2>
+
+<pre><code class="r">devtools::install_github(&quot;richfitz/redux&quot;)
+</code></pre>
+
+<h2>See also</h2>
+
+<ul>
+<li><a href="https://cran.r-project.org/web/packages/rredis/index.html"><code>rredis</code></a>, the original R Redis client</li>
+<li><a href="https://github.com/eddelbuettel/rcppredis"><code>RcppRedis</code></a>, Dirk Eddelbuettel&#39;s R Redis client, which greatly influenced the design decisions here</li>
+<li><a href="https://github.com/redis/hiredis-rb"><code>hiredis-rb</code></a>, the <em>Ruby</em> Redis client that influenced the subscribe and pipeline support here.</li>
+<li><a href="https://github.com/ropensci/rrlite"><code>rrlite</code></a>, an almost identical interface to <a href="https://github.com/seppo0010/rlite"><code>rlite</code></a>, a serverless-zero configuration database with an identical interface to Redis.</li>
+</ul>
+
+<h2>License</h2>
+
+<p>GPL-2 © <a href="https://github.com/richfitz/redux">Rich FitzJohn</a>.</p>
+
+
+    <h2>Help topics</h2>
+
+    <h3></h3>
+    
+    
+    <ul class="index">
+        
+      <li>
+        <code><a href="hiredis.html">hiredis</a></code>(redis_available)<br />Interface to Redis</li>
+            
+      <li>
+        <code><a href="redis_connection.html">redis_connection</a></code><br />Create a Redis connection</li>
+    
+    </ul>
+  </div>
+  
+  <div class="span3 offset1">
+    <h2>Vignettes</h2>
+    <ul>
+      <li><a href="vignettes/low_level.html">Low level implementation details</a></li>
+      <li><a href="vignettes/redux.html">Using Redis with redux and RedisAPI</a></li>
+    </ul>
+        
+    <h2>Dependencies</h2>
+    <ul>
+      
+      <li><strong>Imports</strong>: RedisAPI</li>
+      <li><strong>Suggests</strong>: knitr, testthat</li>
+      
+    </ul>
+    <h2>Authors</h2>
+    <ul>
+      <li><a href="mailto:rich.fitzjohn@gmail.com">Rich FitzJohn</a> [aut, cre]</li>
+      <li>Salvatore Sanfilippo [cph]</li>
+      <li>Pieter Noordhuis [cph]</li>
+    </ul>
+
+  </div>
+</div>
+      
+      <footer>
+      <p class="pull-right"><a href="#">Back to top</a></p>
+<p>Built by <a href="https://github.com/hadley/staticdocs">staticdocs</a>. Styled with <a href="http://twitter.github.com/bootstrap">bootstrap</a>.</p>
+      </footer>
+    </div>
+  </body>
+</html>
